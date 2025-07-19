@@ -9,6 +9,7 @@ public class testClass {
 public interface Parser{
     public String parse(String str) ;
 };
+
 public class StringParser{
     public static String convert(String str){
         if (str.length() >= 5) return str.toLowerCase() ;
@@ -21,9 +22,13 @@ public static class MyPrinter {
         System.out.println(str);
     }
 };
+
+
+
 public static void main(String[] args) {
-    MyPrinter mp = new MyPrinter() ;
-    mp.print("haasdasds", (StringParser::convert)) ;
+//    MyPrinter mp = new MyPrinter() ;
+//    mp.print("haasdasds", (StringParser::convert)) ;
+
 
 }
 }
