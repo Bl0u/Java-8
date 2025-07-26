@@ -1,89 +1,81 @@
-https://www.youtube.com/watch?v=svQKKg3aFzo
-https://www.youtube.com/watch?v=xZ67TS5EZNU
-https://www.youtube.com/watch?v=KVCzKKbXfH0
+## Video References
 
-worht mentioning, static methods in interface can be used to define utility functions or helpers
+- [Java 8 Interview Questions and Answers | Java Lambda Expressions | YouTube](https://www.youtube.com/watch?v=svQKKg3aFzo)
+- [Java 8 Interview Questions | YouTube](https://www.youtube.com/watch?v=xZ67TS5EZNU)
+- [Java Lambda Expressions Interview Questions | YouTube](https://www.youtube.com/watch?v=KVCzKKbXfH0)
+- [Java 8 Interview Questions: Method References & More | YouTube](https://www.youtube.com/watch?v=8TAp5rxQy4s)
+- [Java 8 Interview Questions And Answers | YouTube](https://www.youtube.com/watch?v=JBifbNB4jg8)
 
-https://www.youtube.com/watch?v=8TAp5rxQy4s
-explanation of method hiding: Q2
-calling a static method with an instance og an object, the compiler basically replace the callee with the reference type class
-Animal ref = new Dog()
-Animal = reference type
-Dog = instance type
+## Static Methods in Interfaces
 
+- Static methods in interfaces can be used to define utility functions or helpers.
 
-what is method reference: it's a java 8 construct that can be used to reference a method without invoking it, it's used for treating methods as lambda expression
-https://www.baeldung.com/java-8-interview-questions
+---
 
-notice that String::valueOf and String::valueOf
-might be 1- Static method reference 2- unbound method reference
-the difference is the one reference in an actual static function, the other is just a function, that we're calling through the class name it self to be binded with the first argument object
+## Method Hiding (Explained in Q2 of [this video](https://www.youtube.com/watch?v=8TAp5rxQy4s))
 
+If you call a static method using an instance of an object, the compiler replaces the callee with the reference type's class.
+
+Example:
+```java
+Animal ref = new Dog();
+```
+- `Animal` = reference type
+- `Dog` = instance type
+
+If you call a static method on `ref`, it's equivalent to calling it on `Animal`, not `Dog`.
+
+---
+
+## What is a Method Reference?
+
+A method reference is a Java 8 construct that can reference a method without invoking it. It is used to treat methods as lambda expressions.
+
+Useful resource: [Baeldung - Java 8 Interview Questions](https://www.baeldung.com/java-8-interview-questions)
+
+---
+
+### Example: Static vs Unbound Method Reference
+
+- `String::valueOf` can be:
+  1. Static method reference (to a static function)
+  2. Unbound method reference (to a non-static function, to be bound at runtime)
+
+Difference:
+- A static method reference points to an actual static function.
+- An unbound method reference refers to a non-static function, called via the class name, with the first argument being the instance.
+
+---
+
+### Example: Unbound Method Reference
+
+```java
 public void show(){
-System.out.println(this.name)
+    System.out.println(this.name);
 }
+```
 
-you may wonder how String::show === s -> s.show() ;
+- `String::show` is equivalent to `s -> s.show()`
+- The `Consumer` functional interface's `accept` method takes one argument and returns nothing, matching the above.
 
-because the Consumer funcitonal interface, 'accept' function takes only 1 argument and returns nothing, hence a consumer
-
-when we pass a static method, we can call it via the Class name without any need of an instance or anything else, so when we do this 'String::show' on a non static function, Java compiler knows, and he understand that the caller of the function will be the first passed argument in the function we're implementing
+When passing a static method, it can be called via the class name without an instance.  
+When passing a non-static method (e.g., `String::show`), Java knows that the first argument to the functional interface will be the caller object.
 
 ---
-What is an unbound method reference?
-This:
 
-java
-Copy code
+## What is an Unbound Method Reference?
+
+Example:
+```java
 test2 fi = test2Class::length2;
-means:
-
-"I'm referencing a non-static method, but I will provide the instance later, when the functional interface gets called."
-
-So Java says:
-
-You’re referencing length2(String) from test2Class
-
-But you're not passing the instance now — so the instance must be passed at runtime by the first argument of the functional interface method.
+```
+This means:
+- You are referencing a non-static method (`length2`) from `test2Class`.
+- The instance will be provided later, when the functional interface is called.
+- The instance is passed at runtime as the first argument of the functional interface method.
 
 ---
 
+## Additional Resources
 
-
-https://www.simplilearn.com/java-8-interview-questions-and-answers-article
-
-https://www.youtube.com/watch?v=JBifbNB4jg8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [Simplilearn: Java 8 Interview Questions and Answers](https://www.simplilearn.com/java-8-interview-questions-and-answers-article)
