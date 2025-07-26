@@ -1,25 +1,49 @@
-Functional Interface: it's an iterface that has 1 abstract method only
-note it can have multiple default implemented method inside the interface, but must has only 1 abstract method, a method that has no implementation and it must has only one
-what is final ?
-final int x = 5;  // You had to literally mark it final to use it in an inner class
+## Functional Interface
 
+A functional interface is an interface that has exactly one abstract method.  
+- It can have multiple default or static methods with implementations, but only one abstract method (method with no implementation).
 
-what is effectively final
-int x = 5;  // You don't need to write "final" if you don't change it — it's *effectively final*
-Runnable r = () -> System.out.println(x);
+---
 
-what does it mean by not effectively final
-int num = 5;
-Runnable r = () -> System.out.println(num); // Fine
+## What is `final`?
 
-num = 6; // ❌ Now `num` is no longer "effectively final"
-which gives compile time errors
-This will fail to compile, because the lambda captured num, and you changed it after — which breaks the "effectively final" rule.
+- Example:  
+  ```java
+  final int x = 5;  // Must be marked final to use in an inner class or lambda (prior to Java 8)
+  ```
 
+---
 
-what is the deal with variable that aren't mentioned in lambda expression itself?
-    must be final or effectively final, meaning, the lambda enclosing pracets, can't and must not adjust these non mentioned variables -> compile time error
+## What is "effectively final"?
 
+- If you have a variable that is assigned once and not changed, you don't need to explicitly mark it as `final`. It's *effectively final*.
+  ```java
+  int x = 5;  // No need for "final" if you don't modify it
+  Runnable r = () -> System.out.println(x);  // This is fine
+  ```
 
-https://www.geeksforgeeks.org/java/java-lambda-expression-with-collections/
-https://www.geeksforgeeks.org/java/java-lambda-expression-variable-capturing-with-examples/
+---
+
+## What does it mean by "not effectively final"?
+
+- If you change the value of a variable after it is captured by a lambda or inner class, it's no longer "effectively final" and will cause a compile-time error.
+  ```java
+  int num = 5;
+  Runnable r = () -> System.out.println(num); // Still fine
+
+  num = 6; // ❌ Now `num` is no longer "effectively final", compile error if used in lambda
+  ```
+
+---
+
+## Variables Not Mentioned in Lambda Expression
+
+- Any variable from the enclosing scope that is used inside a lambda must be final or effectively final.
+- If you try to modify such a variable after it is used in a lambda, it will cause a compile-time error.
+
+---
+
+## References
+
+- [GeeksforGeeks: Java Lambda Expression with Collections](https://www.geeksforgeeks.org/java/java-lambda-expression-with-collections/)
+- [GeeksforGeeks: Java Lambda Expression Variable Capturing with Examples](https://www.geeksforgeeks.org/java/java-lambda-expression-variable-capturing-with-examples/)
