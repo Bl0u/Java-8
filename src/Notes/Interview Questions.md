@@ -43,6 +43,31 @@ A functional interface is an interface that has exactly one abstract method.
 
 ---
 
+## Difference Between Inline Lambda Expression and Method Reference
+
+**Question:**  
+What is the difference between an inline lambda expression and a method reference in Java, both in terms of compilation and runtime behavior?
+
+**Answer:**  
+- **Inline lambda expression:**  
+  - When you write a lambda expression (e.g., `(x) -> doSomething(x)`), the compiler generates a private static method in the enclosing class for the body of that lambda.
+  - This synthetic method receives the lambda's arguments and executes the code inside the lambda.
+  - The class file size increases because of these extra methods.
+  - At runtime, the lambda is invoked by calling this generated method, which may in turn call other methods.
+  - **Performance:** There is typically no measurable performance difference at runtime compared to method references, but the class file is slightly larger due to the generated method.
+
+- **Method reference:**  
+  - When you use a method reference (e.g., `SomeClass::doSomething`), the compiler directly generates bytecode that calls the referenced method.
+  - No extra synthetic method is generated—the reference points straight to the target method.
+  - This can make the class file slightly smaller and the code a bit simpler.
+  - **Performance:** As with lambdas, there is usually no runtime performance difference.
+
+**Bottom line:**  
+- Both approaches are functionally equivalent in most cases, and the performance difference is negligible.
+- The main distinction is that lambdas generate an extra synthetic method in the class file, while method references do not.
+
+---
+
 ## References
 
 - [GeeksforGeeks: Java Lambda Expression with Collections](https://www.geeksforgeeks.org/java/java-lambda-expression-with-collections/)
